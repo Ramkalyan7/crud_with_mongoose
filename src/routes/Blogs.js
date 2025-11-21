@@ -72,3 +72,28 @@ blogRouter.get("/user/blogs",async(req,res)=>{
     }
 })
 
+
+blogRouter.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      {
+        title: req.body.title,
+        description: req.body.description,
+      },
+      { new: true } 
+    );
+
+    if (!updatedBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(200).json(updatedBlog);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
