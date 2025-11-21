@@ -44,7 +44,7 @@ blogRouter.get("/:id" ,async (req, res) => {
   }
 });
 
-blogRouter.get("/delete/:id",async(req,res)=>{
+blogRouter.delete("/delete/:id",async(req,res)=>{
     try {
         const {id}=req.params
         const blog = await Blog.findByIdAndDelete(id);
@@ -71,3 +71,4 @@ blogRouter.get("/user/blogs",async(req,res)=>{
        res.status(500).json({ message: "error occured" });
     }
 })
+
